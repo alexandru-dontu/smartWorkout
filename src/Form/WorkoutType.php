@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Exercise;
-use App\Entity\User;
+use App\Entity\ExerciseLog;  // Make sure to import ExerciseLog
 use App\Entity\Workout;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,28 +14,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkoutType extends AbstractType
 {
+    // Method to build the form
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name',
+                'label' => 'Name',  // Label for the workout name field
             ])
             ->add('exerciseLogs', CollectionType::class, [
-                'entry_type' => ExerciseLogType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' => true,
+                'entry_type' => ExerciseLogType::class,  // Specify the type of entries in the collection
+                'entry_options' => ['label' => false],   // No label for each entry
+                'allow_add' => true,                      // Allow adding multiple exercise logs
+                'by_reference' => false,                  // Ensure the collection is updated properly
+                'allow_delete' => true,                   // Allow removal of exercise logs
             ])
             ->add('button', SubmitType::class, [
-                'label' => 'Add',
+                'label' => 'Add',  // Label for the submit button
             ]);
     }
 
+    // Method to configure options for the form
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Workout::class,
+            'data_class' => Workout::class, // Maps the form to the Workout entity
         ]);
     }
 }

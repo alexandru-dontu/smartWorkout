@@ -15,31 +15,32 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+    // Method to build the form
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name',
-                'required' => true,
+                'label' => 'Name',   // Label for the user's name field
+                'required' => true,  // Field is required
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
-                'required' => true,
+                'label' => 'Email',  // Label for the email field
+                'required' => true,  // Field is required
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password',
-                'required' => true,
+                'label' => 'Password', // Label for the password field
+                'required' => true,    // Field is required
             ])
             ->add('button', SubmitType::class, [
-                'label' => 'Register',
-            ])
-        ;
+                'label' => 'Register',  // Label for the submit button
+            ]);
     }
 
+    // Method to configure options for the form
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => User::class, // Maps the form to the User entity
         ]);
     }
 }
